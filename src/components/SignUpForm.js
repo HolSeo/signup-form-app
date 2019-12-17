@@ -34,6 +34,7 @@ class SignUpForm extends Component {
                 email: '',
                 password: '',
             },
+            errorMessage: '',
         };
     }
 
@@ -42,7 +43,9 @@ class SignUpForm extends Component {
         if (validForm(this.state)) {
             console.log('VALID FORM!')
         } else {
-            console.log('INVALID FORM!')
+            this.setState({
+                errorMessage: 'Missing Required Fields.',
+            })
         }
     }
 
@@ -69,6 +72,12 @@ class SignUpForm extends Component {
             formErrors,
             [name]: value,
         });
+
+        if (validForm(this.state)) {
+            this.setState({
+                'errorMessage': '',
+            })
+        }
     }
     render() {
         return (
@@ -84,6 +93,9 @@ class SignUpForm extends Component {
                     <Input type='password' title='Password' name="password" value={this.state.password} handleChange={this.handleChange} />
                     <button>Sign Up Button</button>
                 </form>
+                {this.state.errorMessage && (
+                    <p className="SignUpForm__errorMessage">{this.state.errorMessage}</p>
+                )}
             </div>
         )
     }
