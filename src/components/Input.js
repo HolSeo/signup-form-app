@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = ({ title, name, type, value, handleChange }) => {
+const Input = ({ title, name, type, value, handleChange, errorMessage }) => {
     return (
         <div className="Input">
             <label className="Input__label" htmlFor={title}>{title}</label>
@@ -11,6 +11,9 @@ const Input = ({ title, name, type, value, handleChange }) => {
                 value={value}
                 onChange={handleChange}
             />
+            {errorMessage && (
+                <span className="Input__errorMessage">{errorMessage}</span>
+            )}
         </div>
     );
 }
