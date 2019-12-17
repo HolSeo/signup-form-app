@@ -9,6 +9,11 @@ class SignUpForm extends Component {
             firstName: '',
             email: '',
             password: '',
+            formErrors: {
+                firstName: '',
+                email: '',
+                password: '',
+            },
         };
     }
 
@@ -17,7 +22,28 @@ class SignUpForm extends Component {
     }
 
     handleChange = (event) => {
-        // Input change logic goes here.
+        event.preventDefault();
+        let { name, value } = event.target;
+        value = value.trim();
+
+        const { formErrors } = this.state;
+        switch (name) {
+            case 'firstName':
+                formErrors[name] = value.length < 1 ? 'First Name: Required' : '';
+                break;
+            case 'email':
+                formErrors[name] = value.length > 5 ? '' : 'Email not valid.';
+                break;
+            case 'password':
+                formErrors[name] = value.length < 5 ? 'Password minimun length: 5' : '';
+                break;
+            default:
+                break;
+        }
+        this.setState({
+            formErrors,
+            [name]: value,
+        });
     }
     render() {
         return (
