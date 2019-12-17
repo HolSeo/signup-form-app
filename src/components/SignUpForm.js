@@ -1,6 +1,26 @@
 import React, { Component } from 'react';
 import Input from './Input';
 
+const validateEmail = (email) => {
+    // Source: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+    const emailRegex = RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    return emailRegex.test(email);
+}
+
+const validForm = ({ formErrors, firstName, email, password }) => {
+    let status = true;
+    if (!firstName.length || !email.length || !password.length) {
+        return false;
+    }
+
+    Object.values(formErrors).forEach(value => {
+        if (value.length > 0) {
+            status = false;
+        }
+    });
+    return status;
+}
+
 class SignUpForm extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +38,12 @@ class SignUpForm extends Component {
     }
 
     handleFormSubmit = (event) => {
-        // Form submit logic goes here.
+        event.preventDefault();
+        if (validForm(this.state)) {
+            console.log('VALID FORM!')
+        } else {
+            console.log('INVALID FORM!')
+        }
     }
 
     handleChange = (event) => {
@@ -32,7 +57,7 @@ class SignUpForm extends Component {
                 formErrors[name] = value.length < 1 ? 'First Name: Required' : '';
                 break;
             case 'email':
-                formErrors[name] = value.length > 5 ? '' : 'Email not valid.';
+                formErrors[name] = validateEmail(value) ? '' : 'Email not valid.';
                 break;
             case 'password':
                 formErrors[name] = value.length < 5 ? 'Password minimun length: 5' : '';
