@@ -13,8 +13,14 @@ class FormContainer extends Component {
         }
     }
 
-    handleSubmit = (event) => {
-        // Handle Form Submission
+    handleSubmit = ({ firstName, email, status }) => {
+        if (status) {
+            this.setState({
+                isLoggedIn: true,
+                firstName,
+                email,
+            });
+        }
     }
 
     render() {
@@ -24,7 +30,7 @@ class FormContainer extends Component {
         if (isLoggedIn) {
             form = <Confirmation email={this.state.email} firstName={this.state.firstName} />
         } else {
-            form = <SignUpForm />
+            form = <SignUpForm onSubmit={this.handleSubmit} />
         }
         return (
             <div className="FormContainer">

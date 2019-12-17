@@ -35,6 +35,7 @@ class SignUpForm extends Component {
                 email: '',
                 password: '',
             },
+            status: false,
             errorMessage: '',
         };
     }
@@ -42,7 +43,9 @@ class SignUpForm extends Component {
     handleFormSubmit = (event) => {
         event.preventDefault();
         if (validForm(this.state)) {
-            console.log('VALID FORM!')
+            this.setState({ status: true }, () => {
+                this.props.onSubmit(this.state);
+            })
         } else {
             this.setState({
                 errorMessage: 'Missing Required Fields.',
