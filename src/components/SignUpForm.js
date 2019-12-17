@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Input from './Input';
+import SignUpButton from './SignUpButton';
 
 const validateEmail = (email) => {
     // Source: https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
@@ -91,7 +92,7 @@ class SignUpForm extends Component {
                     <Input type='text' title='First Name' name="firstName" value={this.state.firstName} handleChange={this.handleChange} />
                     <Input type='text' title='Email Address' name="email" value={this.state.email} handleChange={this.handleChange} />
                     <Input type='password' title='Password' name="password" value={this.state.password} handleChange={this.handleChange} />
-                    <button>Sign Up Button</button>
+                    <SignUpButton onClick={this.handleFormSubmit} />
                 </form>
                 {this.state.errorMessage && (
                     <p className="SignUpForm__errorMessage">{this.state.errorMessage}</p>
