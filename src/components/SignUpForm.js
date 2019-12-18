@@ -91,14 +91,14 @@ class SignUpForm extends Component {
                     <h1>Sign Up</h1>
                     <p>Use the form below to sign up for this super awesome service. <br /> You're only a few steps away!</p>
                 </header>
-                <form onSubmit={this.handleFormSubmit}>
+                <form data-testid='form' onSubmit={this.handleFormSubmit}>
                     <Input type='text' title='First Name' name="firstName" value={this.state.firstName} handleChange={this.handleChange} errorMessage={this.state.formErrors.firstName} />
                     <Input type='text' title='Email Address' name="email" value={this.state.email} handleChange={this.handleChange} errorMessage={this.state.formErrors.email} />
                     <Input type='password' title='Password' name="password" value={this.state.password} handleChange={this.handleChange} errorMessage={this.state.formErrors.password} />
                     <SignUpButton onClick={this.handleFormSubmit} />
                 </form>
                 {this.state.errorMessage && (
-                    <p className="SignUpForm__errorMessage">{this.state.errorMessage}</p>
+                    <p data-testid='error-message' className="SignUpForm__errorMessage">{this.state.errorMessage}</p>
                 )}
             </div>
         )

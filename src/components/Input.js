@@ -12,7 +12,7 @@ const Input = ({ title, name, type, value, handleChange, errorMessage }) => {
                 onChange={handleChange}
             />
             {errorMessage && (
-                <span className="Input__errorMessage">{errorMessage}</span>
+                <span data-testid="error-message" className="Input__errorMessage">{errorMessage}</span>
             )}
         </div>
     );
